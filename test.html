@@ -6,21 +6,103 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
 
     <style>
+    body{
+      background-color:#ededed;
+      font-family: "Consolas";
+    }
+
+    .wrapper{
+      width: 300px;
+      margin: 0 auto;
+    }
+
     .timer{
       font-size: 68px;
-      font-family: "Comic Sans MS", "Consolas";
       text-align: center;
+      background-color: #fff;
+      width: 100%;
+      margin: 0 auto;
       margin-top: 200px;
-      color: #FF0;
-      background-color: #00F;
+      padding: 20px 10px;
+      box-shadow: 0px 2px 35px rgba(0,0,0,.08);
+      box-sizing: border-box;
     }
+
+    a{
+      color: #333;
+      text-decoration: none;
+      font-size: 24px;
+      background-color: #fff;
+      padding: 15px 35px;
+      box-shadow: 0px 2px 35px rgba(0,0,0,.08);
+      transition: all .10s ease-in-out;
+    }
+
+    .active{
+      background-color: #cdc4ff;
+    }
+
+    a:active{
+      background-color:#beb2ff;
+    }
+
+    ul{
+      margin: 0 auto;
+      width: 300px;
+    }
+
+    li{
+      display: inline-block;
+      margin-top: 40px;
+      margin-right: 18.8px;
+    }
+
+    li:last-child{
+      margin-right: 0px;
+    }
+
+    .studyMinutes{
+      margin-top: 43px;
+      border-top: 2px solid #cdc4ff;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .studyMinutes li{
+      margin-right: 17px;
+    }
+
+    .studyMinutes li:last-child{
+      margin-right: 0;
+    }
+
+    .studyMinutes a{
+      padding: 15px 28px;
+    }
+
+
     </style>
 
   </head>
   <body>
 
-    <p class="timer">
-      <span id="minutes">25</span>:<span id="seconds">00</span>
+    <div class="wrapper">
+
+      <p class="timer">
+        <span id="minutes">25</span>:<span id="seconds">00</span>
+      </p>
+
+      <ul>
+        <li><a href="#!" id="startStopBtn">Start</a></li>
+        <li><a href="#!" id="resetBtn">Reset</a></li>
+      </ul>
+
+      <ul class="studyMinutes">
+        <li><a href="#!" id="study20">20</a></li>
+        <li><a href="#!" class="active" id="study25">25</a></li>
+        <li><a href="#!" id="study30">30</a></li>
+      </ul>
+
     </div>
 
   </body>
@@ -29,26 +111,101 @@
 
     var timeLeft = 1500;
     var timerId = setInterval(countdown, 1000);
+    var countdownActive = false;
 
     function countdown() {
       if (timeLeft == 0) {
         // stop counting down
       } else {
-        // count down by one
-        timeLeft--;
-        console.log(timeLeft);
+
+        if (countdownActive){
+          // count down by one
+          timeLeft--;
+        };
+        //console.log(timeLeft);
       }
 
       formatSeconds(timeLeft);
     }
 
-    document.addEventListener("keypress", function(event) {
-        if (event.keyCode == 65) {
-          // do something
-        }
-    });
+    document.getElementById("startStopBtn").addEventListener("click", startStopFunction);
+    document.getElementById("resetBtn").addEventListener("click", resetFunction);
+    document.getElementById("study20").addEventListener("click", changeTo20);
+    document.getElementById("study25").addEventListener("click", changeTo25);
+    document.getElementById("study30").addEventListener("click", changeTo30);
 
-  // console.log(formattedM + formattedS);
+    function startStopFunction(){
+      countdownActive = !countdownActive;
+      if (countdownActive){
+        document.getElementById("startStopBtn").innerHTML = "Pause";
+        document.getElementById("startStopBtn").classList.toggle("active");
+      } else {
+        document.getElementById("startStopBtn").innerHTML = "Start";
+        document.getElementById("startStopBtn").classList.toggle("active");
+      }
+    }
+
+    function resetFunction(){
+      timeLeft = 1500;
+
+      if(countdownActive){
+        countdownActive = !countdownActive;
+        document.getElementById("startStopBtn").innerHTML = "Start";
+        document.getElementById("startStopBtn").classList.toggle("active");
+      }
+    }
+
+    function changeTo20(){
+      timeLeft = 1200;
+
+      if(document.getElementById("study20").classList.contains("active")){
+        // do nothing
+      } else {
+        document.getElementById("study20").classList.toggle("active");
+        document.getElementById("study25").classList.remove("active");
+        document.getElementById("study30").classList.remove("active");
+
+        if(!countdownActive){
+          countdownActive = !countdownActive;
+          document.getElementById("startStopBtn").innerHTML = "Pause";
+          document.getElementById("startStopBtn").classList.toggle("active");
+        } else {
+          // nothing
+        }
+      }
+    }
+
+    function changeTo25(){
+      timeLeft = 1500;
+
+      if(document.getElementById("study25").classList.contains("active")){
+        // do nothing
+      } else {
+        document.getElementById("study25").classList.toggle("active");
+        document.getElementById("study20").classList.remove("active");
+        document.getElementById("study30").classList.remove("active");
+      }
+    }
+
+    function changeTo30(){
+      timeLeft = 1800;
+
+      if(document.getElementById("study30").classList.contains("active")){
+        // do nothing
+      } else {
+        document.getElementById("study30").classList.toggle("active");
+        document.getElementById("study20").classList.remove("active");
+        document.getElementById("study25").classList.remove("active");
+      }
+    }
+
+
+    // document.addEventListener("keypress", function(event) {
+    //
+    //     if (event.keyCode == 97) {
+    //       countdownActive = !countdownActive;
+    //     }
+    // });
 
 
     function formatSeconds(input) {
