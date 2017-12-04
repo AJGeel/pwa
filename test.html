@@ -11,6 +11,16 @@
       font-family: "Consolas";
     }
 
+    *::selection {
+      background-color: rgba(0,0,0,.5);
+      color: #fff;
+    }
+
+    *::-moz-selection {
+      background-color: rgba(0,0,0,.5);
+      color: #fff;
+    }
+
     .wrapper{
       width: 300px;
       margin: 0 auto;
@@ -112,11 +122,20 @@
     var timeLeft = 1500;
     var timerId = setInterval(countdown, 1000);
     var countdownActive = false;
+    var gongPlaying = false;
 
     function countdown() {
       if (timeLeft == 0) {
-        // stop counting down
+        var gongPlaying = false;
       } else {
+
+        if (timeLeft == 1){
+          if (!gongPlaying){
+            var gong = new Audio('gong.mp3');
+            gong.play();
+            gongPlaying = true;
+          }
+        }
 
         if (countdownActive){
           // count down by one
@@ -169,8 +188,6 @@
           countdownActive = !countdownActive;
           document.getElementById("startStopBtn").innerHTML = "Pause";
           document.getElementById("startStopBtn").classList.toggle("active");
-        } else {
-          // nothing
         }
       }
     }
@@ -184,11 +201,17 @@
         document.getElementById("study25").classList.toggle("active");
         document.getElementById("study20").classList.remove("active");
         document.getElementById("study30").classList.remove("active");
+
+        if(!countdownActive){
+          countdownActive = !countdownActive;
+          document.getElementById("startStopBtn").innerHTML = "Pause";
+          document.getElementById("startStopBtn").classList.toggle("active");
+        }
       }
     }
 
     function changeTo30(){
-      timeLeft = 1800;
+      timeLeft = 5;
 
       if(document.getElementById("study30").classList.contains("active")){
         // do nothing
@@ -196,6 +219,12 @@
         document.getElementById("study30").classList.toggle("active");
         document.getElementById("study20").classList.remove("active");
         document.getElementById("study25").classList.remove("active");
+
+        if(!countdownActive){
+          countdownActive = !countdownActive;
+          document.getElementById("startStopBtn").innerHTML = "Pause";
+          document.getElementById("startStopBtn").classList.toggle("active");
+        }
       }
     }
 
