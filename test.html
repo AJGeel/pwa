@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+
+    <style>
+    .timer{
+      font-size: 68px;
+      font-family: "Comic Sans MS", "Consolas";
+      text-align: center;
+      margin-top: 200px;
+      color: #FF0;
+      background-color: #00F;
+    }
+    </style>
+
+  </head>
+  <body>
+
+    <p class="timer">
+      <span id="minutes">25</span>:<span id="seconds">00</span>
+    </div>
+
+  </body>
+
+  <script>
+
+    var timeLeft = 1500;
+    var timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+      if (timeLeft == 0) {
+        // stop counting down
+      } else {
+        // count down by one
+        timeLeft--;
+        console.log(timeLeft);
+      }
+
+      formatSeconds(timeLeft);
+    }
+
+    document.addEventListener("keypress", function(event) {
+        if (event.keyCode == 65) {
+          // do something
+        }
+    });
+
+  // console.log(formattedM + formattedS);
+
+
+    function formatSeconds(input) {
+      input = Number(input);
+      var m = Math.floor(input % 3600 / 60);   // changes seconds to minutes
+      var s = Math.floor(input % 3600 % 60);   // shows the remainder seconds
+
+      var formattedM = ("0" + m).slice(-2);    // upkeeps the "00" format
+      var formattedS = ("0" + s).slice(-2);    // upkeeps the "00" format
+
+      document.getElementById('minutes').innerHTML = formattedM;
+      document.getElementById('seconds').innerHTML = formattedS;
+    }
+
+  </script>
+</html>
