@@ -1,0 +1,83 @@
+body{
+  background-color:#ededed;
+  font-family: "Consolas";
+}
+
+*::selection {
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+}
+
+*::-moz-selection {
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+}
+
+.wrapper{
+  width: 300px;
+  margin: 0 auto;
+}
+
+.timer{
+  font-size: 68px;
+  text-align: center;
+  background-color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 200px;
+  padding: 20px 10px;
+  box-shadow: 0px 2px 35px rgba(0,0,0,.08);
+  box-sizing: border-box;
+}
+
+a{
+  color: #333;
+  text-decoration: none;
+  font-size: 24px;
+  background-color: #fff;
+  padding: 15px 35px;
+  box-shadow: 0px 2px 35px rgba(0,0,0,.08);
+  transition: all .10s ease-in-out;
+}
+
+.active{
+  background-color: #cdc4ff;
+}
+
+a:active{
+  background-color:#beb2ff;
+}
+
+ul{
+  margin: 0 auto;
+  width: 300px;
+}
+
+li{
+  display: inline-block;
+  margin-top: 40px;
+  margin-right: 18.8px;
+}
+
+li:last-child{
+  margin-right: 0px;
+}
+
+.studyMinutes{
+  margin-top: 43px;
+  border-top: 2px solid #cdc4ff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.studyMinutes li{
+  margin-right: 17px;
+}
+
+.studyMinutes li:last-child{
+  margin-right: 0;
+}
+
+.studyMinutes a{
+  padding: 15px 27.1px;
+}

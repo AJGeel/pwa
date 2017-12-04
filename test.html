@@ -4,94 +4,7 @@
     <meta charset="UTF-8">
     <title>Test</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
-
-    <style>
-    body{
-      background-color:#ededed;
-      font-family: "Consolas";
-    }
-
-    *::selection {
-      background-color: rgba(0,0,0,.5);
-      color: #fff;
-    }
-
-    *::-moz-selection {
-      background-color: rgba(0,0,0,.5);
-      color: #fff;
-    }
-
-    .wrapper{
-      width: 300px;
-      margin: 0 auto;
-    }
-
-    .timer{
-      font-size: 68px;
-      text-align: center;
-      background-color: #fff;
-      width: 100%;
-      margin: 0 auto;
-      margin-top: 200px;
-      padding: 20px 10px;
-      box-shadow: 0px 2px 35px rgba(0,0,0,.08);
-      box-sizing: border-box;
-    }
-
-    a{
-      color: #333;
-      text-decoration: none;
-      font-size: 24px;
-      background-color: #fff;
-      padding: 15px 35px;
-      box-shadow: 0px 2px 35px rgba(0,0,0,.08);
-      transition: all .10s ease-in-out;
-    }
-
-    .active{
-      background-color: #cdc4ff;
-    }
-
-    a:active{
-      background-color:#beb2ff;
-    }
-
-    ul{
-      margin: 0 auto;
-      width: 300px;
-    }
-
-    li{
-      display: inline-block;
-      margin-top: 40px;
-      margin-right: 18.8px;
-    }
-
-    li:last-child{
-      margin-right: 0px;
-    }
-
-    .studyMinutes{
-      margin-top: 43px;
-      border-top: 2px solid #cdc4ff;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .studyMinutes li{
-      margin-right: 17px;
-    }
-
-    .studyMinutes li:last-child{
-      margin-right: 0;
-    }
-
-    .studyMinutes a{
-      padding: 15px 28px;
-    }
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/pomo.css" />
 
   </head>
   <body>
@@ -110,7 +23,7 @@
       <ul class="studyMinutes">
         <li><a href="#!" id="study20">20</a></li>
         <li><a href="#!" class="active" id="study25">25</a></li>
-        <li><a href="#!" id="study30">30</a></li>
+        <li><a href="#!" id="study30">💣</a></li>
       </ul>
 
     </div>
@@ -119,7 +32,7 @@
 
   <script>
 
-    var timeLeft = 1500;
+    var timeLeft = 1500; //
     var timerId = setInterval(countdown, 1000);
     var countdownActive = false;
     var gongPlaying = false;
@@ -127,21 +40,20 @@
     function countdown() {
       if (timeLeft == 0) {
         var gongPlaying = false;
+        /* Todo:                                               /
+        /  Log one successful session of $MINUTES to back-end */
       } else {
-
         if (timeLeft == 1){
           if (!gongPlaying){
-            var gong = new Audio('gong.mp3');
+            var gong = new Audio('gong.mp3'); // Play the gong sound effect
             gong.play();
-            gongPlaying = true;
+            gongPlaying = true; // Reset the gongPlaying variable to prevent audio stacking
           }
         }
 
-        if (countdownActive){
-          // count down by one
+        if (countdownActive){   // Remove one second, every second
           timeLeft--;
         };
-        //console.log(timeLeft);
       }
 
       formatSeconds(timeLeft);
@@ -211,7 +123,7 @@
     }
 
     function changeTo30(){
-      timeLeft = 5;
+      timeLeft = 6;
 
       if(document.getElementById("study30").classList.contains("active")){
         // do nothing
