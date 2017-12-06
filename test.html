@@ -8,6 +8,20 @@
     <link rel="stylesheet" type="text/css" href="css/pomo.css" />
     <link rel="shortcut icon" href="https://arthurgeel.com/experiments/img/favicon.png" />
 
+    <style>
+      .daily{
+        position: fixed;
+        bottom: 50px;
+        left: 20px;
+      }
+
+      .total{
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+      }
+    </style>
+
   </head>
   <body>
 
@@ -30,6 +44,9 @@
 
     </div>
 
+    <p class="daily">Daily count: <span id="dailyCount">0</span></p>
+    <p class="total">Total count: <span id="totalCount">0</span></p>
+
   </body>
 
   <script>
@@ -38,20 +55,29 @@
     var timerId = setInterval(countdown, 1000);
     var countdownActive = false;
     var gongPlaying = false;
+    var dailyCount = 0;
+    var totalCount = 10;
+
+
+    document.getElementById("dailyCount").innerHTML = dailyCount;
+    document.getElementById("totalCount").innerHTML = totalCount;
 
     function countdown() {
       if (timeLeft == 0) {
         var gongPlaying = false;
         document.getElementById("startStopBtn").classList.remove("active");
         document.getElementById("resetBtn").classList.toggle("active");
-        /* Todo:                                               /
-        /  Log one successful session of $MINUTES to back-end */
+
       } else {
         if (timeLeft == 1){
           if (!gongPlaying){
             var gong = new Audio('gong.mp3'); // Play the gong sound effect
             gong.play();
             gongPlaying = true; // Reset the gongPlaying variable to prevent audio stacking
+            dailyCount++;
+            totalCount++;
+            document.getElementById("dailyCount").innerHTML = dailyCount;
+            document.getElementById("totalCount").innerHTML = totalCount;
           }
         }
 
@@ -147,18 +173,11 @@
         if(!countdownActive){
           countdownActive = !countdownActive;
           document.getElementById("startStopBtn").innerHTML = "Pause";
-          document.getElementById("startStopBtn").classList.toggle("active");
+          document.getElementById("startStopBtn").classList.add("active");
+          document.getElementById("resetBtn").classList.remove("active");
         }
       }
     }
-
-
-    // document.addEventListener("keypress", function(event) {
-    //
-    //     if (event.keyCode == 97) {
-    //       countdownActive = !countdownActive;
-    //     }
-    // });
 
 
     function formatSeconds(input) {
@@ -169,13 +188,23 @@
       var formattedM = ("0" + m).slice(-2);    // upkeeps the "00" format
       var formattedS = ("0" + s).slice(-2);    // upkeeps the "00" format
 
+      // document.title = ("Pomo — " + formattedM + ":" + formattedS); // changes the page title to the current time
+      // Todo: fix the annoying 1 second delay.
+
       document.getElementById('minutes').innerHTML = formattedM;
       document.getElementById('seconds').innerHTML = formattedS;
+
     }
 
   </script>
 
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<script>function(e,t,a,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=t.createElement(a),s=t.getElementsByTagName(a)[0],o.async=1,o.src="https://www.google-analytics.com/analytics.js",s.parentNode.insertBefore(o,s)}(window,document,"script",0,"ga"),ga("create","UA-84000548-1","auto"),ga("send","pageview");
+ga('create', 'UA-84000548-1', 'auto');
+ga('send', 'pageview');
 </script>
 </html>
