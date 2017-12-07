@@ -1,3 +1,7 @@
+:root{
+  --highlight-color: #cdc4eb;
+}
+
 *::selection {
   background-color: rgba(0,0,0,.5);
   color: #fff;
@@ -93,7 +97,7 @@ body{
   transform: translateY(1px);
   transition: all .1s ease-out;
   box-shadow: 0px 1px 10px rgba(0,0,0,.05);
-  background-color: #cdc4eb;
+  background-color: var(--highlight-color);
 }
 
 .stats{
@@ -124,7 +128,7 @@ body{
 }
 
 .divider{
-  background-color: #cdc4ff;
+  background-color: var(--highlight-color);
   height: 2px;
   width: 100%;
   animation: scrollUp2 1.5s;
@@ -151,7 +155,7 @@ body{
 }
 
 .active{
-  background-color: #cdc4ff !important;
+  background-color: var(--highlight-color) !important;
 }
 
 @media (max-width: 410px){
