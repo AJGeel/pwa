@@ -1,0 +1,26 @@
+{
+  "short_name": "Pomodoro Proto",
+  "name": "Arthur Geel's Productivity Timer App",
+  "version": "0.0.1",
+  "start_url": "https://arthurgeel.com/pwa/index.html",
+  "background-color": "#efefef",
+  "display": "standalone",
+  "theme-colour": "#cdc4eb",
+  "icons": [
+    {
+      "src": "i/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "i/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "i/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}
