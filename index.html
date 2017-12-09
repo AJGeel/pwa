@@ -6,8 +6,8 @@
     <title>Pomodoro App &mdash; Prototype</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/pomo.css" />
-    <link rel="shortcut icon" href="https://arthurgeel.com/experiments/img/favicon.png" />
-    <link rel="manifest" href="js/manifest.json">
+    <!-- <link rel="shortcut icon" href="https://arthurgeel.com/experiments/img/favicon.png" /> -->
+    <link rel="manifest" href="manifest.json">
 
   </head>
   <body>
@@ -65,17 +65,33 @@
     var totalCount = 7;
     var prodScore = 500;
 
+    // Start of GUI control elements
+    var startStopBtn = document.getElementById("startStopBtn");
+    var resetBtn = document.getElementById("resetBtn");
 
-    document.getElementById("dailyCount").innerHTML = dailyCount;
-    document.getElementById("totalCount").innerHTML = totalCount;
-    document.getElementById("prodScore").innerHTML = prodScore;
+    var study20ID = document.getElementById("study20");
+    var study25ID = document.getElementById("study25");
+    var study30ID = document.getElementById("study30");
+    // End of GUI control elements
+
+
+
+    // Start of Data Visualisation elements
+    var dailyCountID = document.getElementById("dailyCount");
+    var totalCountID = document.getElementById("totalCount");
+    var prodScoreID = document.getElementById("prodScore");
+    // End of Data Visualisation elements
+
+    dailyCountID.innerHTML = dailyCount;
+    totalCountID.innerHTML = totalCount;
+    prodScoreID.innerHTML = prodScore;
 
     function countdown() {
       if (timeLeft == 0) {
         var gongPlaying = false;
-        document.getElementById("startStopBtn").classList.remove("active");
-        document.getElementById("startStopBtn").classList.innerHTML = "Start";
-        document.getElementById("resetBtn").classList.toggle("active"); // flashes the reset button
+        startStopBtn.classList.remove("active");
+        startStopBtn.classList.innerHTML = "Start";
+        resetBtn.classList.toggle("active"); // flashes the reset button
 
       } else {
         if (timeLeft == 1){
@@ -87,9 +103,9 @@
             dailyCount++;
             totalCount++;
             prodScore = prodScore + dailyCount + Math.sqrt(totalCount);
-            document.getElementById("dailyCount").innerHTML = dailyCount;
-            document.getElementById("totalCount").innerHTML = totalCount;
-            document.getElementById("prodScore").innerHTML = Math.floor(prodScore);
+            dailyCountID.innerHTML = dailyCount;
+            totalCountID.innerHTML = totalCount;
+            prodScoreID.innerHTML = Math.floor(prodScore);
 
           }
         }
@@ -102,20 +118,20 @@
       formatSeconds(timeLeft);
     }
 
-    document.getElementById("startStopBtn").addEventListener("click", startStopFunction);
-    document.getElementById("resetBtn").addEventListener("click", resetFunction);
-    document.getElementById("study20").addEventListener("click", changeTo20);
-    document.getElementById("study25").addEventListener("click", changeTo25);
-    document.getElementById("study30").addEventListener("click", changeTo30);
+    startStopBtn.addEventListener("click", startStopFunction);
+    resetBtn.addEventListener("click", resetFunction);
+    study20ID.addEventListener("click", changeTo20);
+    study25ID.addEventListener("click", changeTo25);
+    study30ID.addEventListener("click", changeTo30);
 
     function startStopFunction(){
       countdownActive = !countdownActive;
       if (countdownActive){
-        document.getElementById("startStopBtn").innerHTML = "Pause";
-        document.getElementById("startStopBtn").classList.toggle("active");
+        startStopBtn.innerHTML = "Pause";
+        startStopBtn.classList.toggle("active");
       } else {
-        document.getElementById("startStopBtn").innerHTML = "Start";
-        document.getElementById("startStopBtn").classList.toggle("active");
+        startStopBtn.innerHTML = "Start";
+        startStopBtn.classList.toggle("active");
       }
     }
 
@@ -124,35 +140,35 @@
 
       if(countdownActive){
         countdownActive = !countdownActive;
-        document.getElementById("startStopBtn").innerHTML = "Start";
-        document.getElementById("startStopBtn").classList.remove("active");
+        startStopBtn.innerHTML = "Start";
+        startStopBtn.classList.remove("active");
       }
 
       if(document.getElementById("study25").classList.contains("active")){
         // do nothing
       } else {
-        document.getElementById("study25").classList.toggle("active");
-        document.getElementById("study20").classList.remove("active");
-        document.getElementById("study30").classList.remove("active");
+        study25ID.classList.toggle("active");
+        study20ID.classList.remove("active");
+        study30ID.classList.remove("active");
       }
     }
 
     function changeTo20(){
       timeLeft = 300;
 
-      document.getElementById("resetBtn").classList.remove("active");
+      resetBtn.classList.remove("active");
 
-      if(document.getElementById("study20").classList.contains("active")){
+      if(study20ID.classList.contains("active")){
         // do nothing
       } else {
-        document.getElementById("study20").classList.toggle("active");
-        document.getElementById("study25").classList.remove("active");
-        document.getElementById("study30").classList.remove("active");
+        study20ID.classList.toggle("active");
+        study25ID.classList.remove("active");
+        study30ID.classList.remove("active");
 
         if(!countdownActive){
           countdownActive = !countdownActive;
-          document.getElementById("startStopBtn").innerHTML = "Pause";
-          document.getElementById("startStopBtn").classList.toggle("active");
+          startStopBtn.innerHTML = "Pause";
+          startStopBtn.classList.toggle("active");
         }
       }
     }
@@ -160,36 +176,36 @@
     function changeTo25(){
       timeLeft = 1500;
 
-      if(document.getElementById("study25").classList.contains("active")){
+      if(study25ID.classList.contains("active")){
         // do nothing
       } else {
-        document.getElementById("study25").classList.toggle("active");
-        document.getElementById("study20").classList.remove("active");
-        document.getElementById("study30").classList.remove("active");
+        study25ID.classList.toggle("active");
+        study20ID.classList.remove("active");
+        study30ID.classList.remove("active");
 
         if(!countdownActive){
           countdownActive = !countdownActive;
-          document.getElementById("startStopBtn").innerHTML = "Pause";
-          document.getElementById("startStopBtn").classList.toggle("active");
+          startStopBtn.innerHTML = "Pause";
+          startStopBtn.classList.toggle("active");
         }
       }
     }
 
     function changeTo30(){
-      timeLeft = 6;
+      timeLeft = 2;
 
-      if(document.getElementById("study30").classList.contains("active")){
+      if(study30ID.classList.contains("active")){
         // do nothing
       } else {
-        document.getElementById("study30").classList.toggle("active");
-        document.getElementById("study20").classList.remove("active");
-        document.getElementById("study25").classList.remove("active");
+        study30ID.classList.toggle("active");
+        study20ID.classList.remove("active");
+        study25ID.classList.remove("active");
 
         if(!countdownActive){
           countdownActive = !countdownActive;
-          document.getElementById("startStopBtn").innerHTML = "Pause";
-          document.getElementById("startStopBtn").classList.add("active");
-          document.getElementById("resetBtn").classList.remove("active");
+          startStopBtn.innerHTML = "Pause";
+          startStopBtn.classList.add("active");
+          resetBtn.classList.remove("active");
         }
       }
     }
@@ -203,11 +219,10 @@
       var formattedM = ("0" + m).slice(-2);    // upkeeps the "00" format
       var formattedS = ("0" + s).slice(-2);    // upkeeps the "00" format
 
-      if (countdownActive){
+      if (countdownActive){ // Todo: fix the annoying 1 second delay
         document.title = (formattedM + ":" + formattedS + " — Time to study"); // changes the page title to the current time
       }
 
-      // Todo: fix the annoying 1 second delay.
 
       document.getElementById('minutes').innerHTML = formattedM;
       document.getElementById('seconds').innerHTML = formattedS;
@@ -216,12 +231,10 @@
 
   </script>
 
-  <script>
-  var emojiMatrix = ['🥑', '☕️', '🍻', '🥃', '🍾', '🥃', '🍪', '🎉', '🔭', '🖥', '💻', '🎧', '❤️', '💛', '💚', '💙', '💜', '💖', '💝', '🎶', '🤘', '👐', '🤞', '☘', '👀', '👓', '⏱', '⏳', '🔋', '💡', '🔨',];
-  var emojiNumber = Math.floor(emojiMatrix.length*Math.random());
-  document.getElementById('footerEmoji').innerHTML = emojiMatrix[emojiNumber];
-  </script>
+  <!-- Scripts -->
+  <script src="js/footer.js"></script>
 
+  <!-- Google Analytics -->
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
