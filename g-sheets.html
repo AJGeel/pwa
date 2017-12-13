@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>G Sheets Test</title>
+
+    <style>
+
+    </style>
+
+  </head>
+  <body>
+
+    <div class="row">
+
+    </div>
+
+
+  </body>
+
+  <script>
+    function get(theUrl, callback)
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                callback(xmlHttp.responseText);
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous
+        xmlHttp.send(null);
+    }
+
+    function callback(){
+      console.log("something"); 
+    }
+
+  </script>
+
+</html>

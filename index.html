@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
@@ -39,7 +39,7 @@
           <p id="dailyCount">0</p>
         </div>
         <div>
-          <p>Weekly:</p>
+          <p>Total:</p>
           <p id="totalCount">0</p>
         </div>
         <div>
@@ -61,9 +61,21 @@
     var timerId = setInterval(countdown, 1000);
     var countdownActive = false;
     var gongPlaying = false;
-    var dailyCount = 0;
-    var totalCount = 7;
+
+    // var dailyCount = 0;
+    var totalCount = 0;
     var prodScore = 500;
+
+    if(typeof(Storage) !== "undefined") {
+        if (!localStorage.dailyCount) {
+            localStorage.dailyCount = 0;
+          }
+        if (!localStorage.totalCount) {
+            localStorage.totalCount = 0;
+        }
+    }
+
+    // var x = "aa";
 
     // Start of GUI control elements
     var startStopBtn = document.getElementById("startStopBtn");
@@ -82,9 +94,10 @@
     var prodScoreID = document.getElementById("prodScore");
     // End of Data Visualisation elements
 
-    dailyCountID.innerHTML = dailyCount;
     totalCountID.innerHTML = totalCount;
     prodScoreID.innerHTML = prodScore;
+
+    dailyCountID.innerHTML = localStorage.dailyCount;
 
     function countdown() {
       if (timeLeft == 0) {
@@ -100,12 +113,13 @@
             gong.play();
             gongPlaying = true; // Reset the gongPlaying variable to prevent audio stacking
 
-            dailyCount++;
-            totalCount++;
-            prodScore = prodScore + dailyCount + Math.sqrt(totalCount);
-            dailyCountID.innerHTML = dailyCount;
-            totalCountID.innerHTML = totalCount;
-            prodScoreID.innerHTML = Math.floor(prodScore);
+            // totalCount++;
+            localStorage.dailyCount = Number(localStorage.dailyCount)+1;
+
+            // prodScore = prodScore + dailyCount + Math.sqrt(totalCount);
+            dailyCountID.innerHTML = localStorage.dailyCount;
+            // totalCountID.innerHTML = totalCount;
+            // prodScoreID.innerHTML = Math.floor(prodScore);
 
           }
         }
@@ -117,6 +131,7 @@
 
       formatSeconds(timeLeft);
     }
+
 
     startStopBtn.addEventListener("click", startStopFunction);
     resetBtn.addEventListener("click", resetFunction);
@@ -210,25 +225,21 @@
       }
     }
 
-
     function formatSeconds(input) {
       input = Number(input);
-      var m = Math.floor(input % 3600 / 60);   // changes seconds to minutes
-      var s = Math.floor(input % 3600 % 60);   // shows the remainder seconds
+      var m = Math.floor(input % 3600 / 60);   // Changes the input from seconds to minutes / seconds
+      var s = Math.floor(input % 3600 % 60);
 
-      var formattedM = ("0" + m).slice(-2);    // upkeeps the "00" format
-      var formattedS = ("0" + s).slice(-2);    // upkeeps the "00" format
+      var formattedM = ("0" + m).slice(-2);    // Ensures the "00" format
+      var formattedS = ("0" + s).slice(-2);
 
-      if (countdownActive){ // Todo: fix the annoying 1 second delay
-        document.title = (formattedM + ":" + formattedS + " — Time to study"); // changes the page title to the current time
-      }
+      document.title = (formattedM + ":" + formattedS + " — Time to study"); // changes the page title to the current time
+
 
 
       document.getElementById('minutes').innerHTML = formattedM;
       document.getElementById('seconds').innerHTML = formattedS;
-
     }
-
   </script>
 
   <!-- Scripts -->
